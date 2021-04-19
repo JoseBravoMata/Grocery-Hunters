@@ -5,48 +5,33 @@
 {{ super() }}
 
 {% block content %}
-    <body style="background-image: url('/images/grocery.jpg');">
-
-
-
-   <div class="container">
-      <div class="dropdown">
-        <button class="dropbtn">Catalogue</button>
-        <div class="dropdown-content">
-          <a href="Recipes.html">Products</a>
+    <h1 class="teal lighten-3">Grocery Hunters</h1>
+           <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+          <label for="first_name">First Name</label>
         </div>
-      </div> 
-      <a href="AboutUs.html">About Us</a>
-    </div>
-
-   
-
-
-
-
-
-   <div class="login-page">
-      
-
-           <br><br><br><br><br>
-           <h1 style="text-align:center">Grocery Hunters</h1>
-
-           <form action="Main.html" class="form">
-             
-            <h2 style="text-align:left">Login</h2>
-           
-              <p align = "center">Email </p>
-           <input type="text" placeholder="Enter Email Id" name="uname" required><br>
-
-               
-              <p align = "center">Password </p>
-           <input type="password" placeholder="Enter Password" name="psw" required>
-     
-     
-
-           <input type="Submit" placeholder ="Login" >
-             
-
-             
-           </form>
+        <div class="input-field col s6">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Last Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+      </div>
+    </form>
+  </div>
 {% endblock %}
