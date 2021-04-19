@@ -8,3 +8,15 @@ from App.controllers import (check_logged)
 @user_views.route('/main', methods=['GET'])
 def get_user_page():
     return render_template('main.html')
+
+@user_views.route('/products', methods=['GET'])
+def get_user_page():
+    return render_template('products.html')
+
+@user_views.route('/list', methods=['GET'])
+def get_user_page():
+    return render_template('list.html')
+
+@user_views.route('/search', methods=['GET'])
+def get_user_page():
+    return render_template('search.html')
