@@ -7,31 +7,63 @@
 {% block content %}
     <h1 class="teal lighten-3">Grocery Hunters</h1>
            <div class="row">
-    <form class="col s12">
+    <form id="myForm" class="col s12">
       <div class="row">
-        <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Last Name</label>
+        <div class="input-field col s12">
+          <input name="email" id="email" type="email" class="validate">
+          <label for="email">Email</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
+          <input name="password" id="password" type="password" class="validate">
           <label for="password">Password</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
+          <input name="submit" id="submit" type="submit" class="btn waves-effect waves-light">
         </div>
-      </div>
-      <div class="row">
+        <div class="input-field col s12">
+          <a id="sign up" class="btn waves-effect waves-light" href="signup">sign up</a>
+        </div>
       </div>
     </form>
   </div>
+  <script>
+    async function postData(url, data){
+      try{
+        let response = await fetch(
+          url, 
+          {
+            method: 'POST',
+            body: JSON.stringify(data),//convert data to JSON string
+            headers: { 'Content-Type':'application/json' }// JSON data
+          },
+        );//1. Send http request and get response
+        
+        let result = await response.text();//2. Get message from response 
+        if(result=="Success")
+          window.location.href="main"
+        else
+          alert(result);//3. Do something with the message 
+      }catch(error){
+        console.log(error);//catch and log any errors
+      }
+}
+    function submit(event){
+      event.preventDefault();//prevents page redirection
+     
+      //event target returns the element on which the event is fired upon ie event.target === myForm
+
+      const form = event.target;
+      const formData = new FormData(form);//get form data
+      const data = Object.fromEntries(formData);//convert form data to object
+
+      postData('/signin', data);
+    }
+
+    //attach the submit function to the submit event of myForm    
+    document.forms['myForm'].addEventListener('submit', submit);
+  </script>
 {% endblock %}

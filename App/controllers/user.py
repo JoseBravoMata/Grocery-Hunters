@@ -5,3 +5,6 @@ from App.models import ( User )
 
 def check_logged():
     return current_identity
+
+def sign_in():
+  return True
