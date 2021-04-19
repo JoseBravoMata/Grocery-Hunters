@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, session, url_for
+from flask_jwt import JWT, jwt_required, current_identity
 
 from App.models import ( User )
 
-def create_user(firstname, lastname, uwi_id, email, gender, dob):
-    # newuser = use()
-    return 'new user'
+def check_logged():
+    return current_identity
