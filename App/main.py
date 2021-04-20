@@ -48,9 +48,9 @@ app.register_blueprint(api_views)
 app.register_blueprint(user_views)
 
 ''' Set up JWT here (if using flask JWT)'''
-def authenticate(uname, password):
+def authenticate(username, password):
   #search for the specified user
-  user = User.query.filter_by(username=uname).first()
+  user = User.query.filter_by(username=username).first()
   #if user is found and password matches
   if user and user.check_password(password):
     return user
