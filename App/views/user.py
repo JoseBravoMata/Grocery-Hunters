@@ -23,13 +23,13 @@ def get_search_page():
 
 @user_views.route('/signin', methods=['POST'])
 def sign_user_in():
-    if(sign_in()):
+    if sign_in(request.get_json()):
       return "Success"
     return "Couldn't sign in"
 
 @user_views.route('/signup', methods=['POST'])
 def sign_user_up():
-    if(sign_up()):
+    if sign_up(request.get_json()) is not False:
       return "Success"
     return "Couldn't sign up"
 

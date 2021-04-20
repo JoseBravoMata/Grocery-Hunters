@@ -26,26 +26,23 @@ def loadConfig(app):
         # DBHOST = os.environ.get("DBHOST")
         # DBPORT = os.environ.get("DBPORT")
         # DBNAME = os.environ.get("DBNAME")
-        DBURI = os.environ.get("DBURI")
         SQLITEDB = os.environ.get("SQLITEDB", default="true")
         app.config['ENV'] = os.environ.get("ENV")
-        app.config['SQLALCHEMY_DATABASE_URI'] = get_db_uri() if SQLITEDB in {'True', 'true', 'TRUE'} else DBURI
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 
 def create_app():
-    app = Flask(__name__, static_url_path='/static')
-    loadConfig(app)
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.config['PREFERRED_URL_SCHEME'] = 'https'
-    app.config['UPLOADED_PHOTOS_DEST'] = "App/uploads"
-    photos = UploadSet('photos', TEXT + DOCUMENTS + IMAGES)
-    configure_uploads(app, photos)
-    db.init_app(app)
-    return app
+  app = Flask(__name__)
+  app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+  app.config['SECRET_KEY'] = "MYSECRET"
+  app.config['JWT_EXPIRATION_DELTA'] = timedelta(days = 7) 
+  db.init_app(app)
+  return app
+
 
 app = create_app()
 
 app.app_context().push()
+db.create_all(app=app)
 
 app.register_blueprint(api_views)
 app.register_blueprint(user_views)

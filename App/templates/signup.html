@@ -50,8 +50,10 @@
         );//1. Send http request and get response
         
         let result = await response.text();//2. Get message from response 
-        if(result=="Success")
-          window.location.href="main"
+        console.log(result);
+        if(result=="Success"){
+          window.location.href="main";
+      }
         else
           alert(result);//3. Do something with the message 
       }catch(error){
