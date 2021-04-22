@@ -28,3 +28,7 @@ def sign_up(userdata):
         db.session.rollback()
         return False # error message
     return True # success
+
+def addRecipe(recipe):
+    lid=len(MyRecipe.query.filter_by(id=current_identity).all())
+    myRecipe=MyRecipe(id=current_identity, lid=lid)
