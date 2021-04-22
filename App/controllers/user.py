@@ -31,13 +31,14 @@ def sign_up(userdata):
     return True # success
 
 def addRecipe(recipe):
-    lid=len(MyRecipe.query.filter_by(id=current_identity).all())
+    user=User.query.filter_by(email=recipe["email"]).first()
+    lid=len(MyRecipe.query.filter_by(id=user.id).all())
     rid=len(MyRecipe.query.all())
-    myRecipe=MyRecipe(rid=rid, id=current_identity.id, lid=lid, rname=recipe["label"], calories=recipe["calories"], fat=recipe["digest"][0]["total"])
+    myRecipe=MyRecipe(rid=rid, id=user.id, lid=lid, rname=recipe["label"], calories=recipe["calories"], fat=recipe["digest"][0]["total"])
     try:
         db.session.add(myRecipe)
         db.session.commit() # save user
     except IntegrityError: # attempted to insert a duplicate item
         db.session.rollback()
-        return False # error message
-    return True # success
+        return "Failure" # error message
+    return "Success" # success

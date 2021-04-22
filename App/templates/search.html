@@ -58,11 +58,13 @@
         let result = document.querySelector('#result');
         records=records.hits;
         let html = '';// create html string
+        let lid=0;
         for(let record of records){
           if(!record.recipe.mealType)
             record.recipe.mealType="N/A";
           if(record.recipe.totalTime==0)
             record.recipe.totalTime="N/A";
+          sessionStorage.setItem(''+lid, JSON.stringify(record.recipe));
           //build html string
           html += `<tr>
             <td><img width="300" height="400" src="${record.recipe.image}"/></td>
@@ -72,7 +74,7 @@
             <td>${record.recipe.digest[0].total}${record.recipe.digest[0].unit}</td>    
             <td>${record.recipe.totalTime}</td>
             <td><a href="${record.recipe.url}">Preparation</a></td>
-            <td><button onclick="addRecipe('${record.recipe}')">Add recipe ingredients to shopping list</a></td>
+            <td><button onclick="addRecipe('${lid}')">Add recipe ingredients to shopping list</a></td>
           </tr>`;
         }
         result.innerHTML = html;//add html string to DOM
@@ -124,7 +126,8 @@
         }
       }
 
-      function addRecipe(recipe){
+      function addRecipe(lid){
+        recipe=JSON.parse(sessionStorage.getItem(''+lid));
         postData('/myrecipes', recipe);
         this.value="Added";
       }
