@@ -11,7 +11,7 @@ class User(db.Model):
     password= db.Column(db.String, nullable=False)
     firstname =  db.Column(db.String, nullable=False)
     lastname =  db.Column(db.String, nullable=False)
-
+    
     def toDict(self):
         return{
             'id': self.id,
@@ -33,3 +33,23 @@ class User(db.Model):
     #To String method
     def __repr__(self):
         return '<User {}>'.format(self.username)  
+
+
+    
+
+class MyRecipe(db.Model):
+    rid = db.Column(db.Integer, primary_key=True)
+    id= db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) #set id as a foreign key to user.id 
+    lid= db.Column(db.Integer, nullable=False) #set userid as a foreign key to user.id 
+    rname =  db.Column(db.String, nullable=False)
+    calories=  db.Column(db.Integer, nullable=True)
+    fat=  db.Column(db.Integer, nullable=True)
+   
+    def toDict(self):
+        return{
+            'rid': self.rid,
+            'lid': self.lid,
+            'rname': self.rname,
+            'calories': self.calories,
+            'fat': self.fat
+        }

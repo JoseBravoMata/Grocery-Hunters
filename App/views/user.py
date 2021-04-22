@@ -21,6 +21,10 @@ def get_list_page():
 def get_search_page():
     return render_template('search.html')
 
+@user_views.route('/myrecipes', methods=['POST'])
+def add_new_recipe():
+    return addRecipe(request.get_json())
+
 @user_views.route('/signin', methods=['POST'])
 def sign_user_in():
     if sign_in(request.get_json()):
