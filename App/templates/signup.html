@@ -128,7 +128,9 @@ input[name=email] {
         let result = await response.text();//2. Get message from response 
         console.log(result);
         if(result=="Success"){
-          window.location.href="main";
+          sessionStorage.setItem('email', data.email);
+          alert(sessionStorage.getItem('email'));  
+          window.location.href="/main";
       }
         else
           alert(result);//3. Do something with the message 

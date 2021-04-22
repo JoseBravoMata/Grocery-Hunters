@@ -4,7 +4,7 @@ from flask_jwt import JWT, jwt_required, current_identity
 from datetime import timedelta 
 from flask_uploads import UploadSet, configure_uploads, IMAGES, TEXT, DOCUMENTS
 
-from App.models import db
+from App.models import db, User
 
 from App.views import (
     api_views,
@@ -50,7 +50,7 @@ app.register_blueprint(user_views)
 ''' Set up JWT here (if using flask JWT)'''
 def authenticate(username, password):
   #search for the specified user
-  user = User.query.filter_by(username=username).first()
+  user = User.query.filter_by(email=username).first()
   #if user is found and password matches
   if user and user.check_password(password):
     return user

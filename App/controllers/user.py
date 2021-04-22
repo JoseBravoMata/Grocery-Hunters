@@ -2,7 +2,8 @@ from flask import redirect, render_template, request, session, url_for
 from flask_jwt import JWT, jwt_required, current_identity
 from sqlalchemy.exc import IntegrityError
 
-from App.models import ( db, User )
+from App.models import ( db, User, MyRecipe )
+
 
 def check_logged():
     return current_identity
@@ -31,4 +32,12 @@ def sign_up(userdata):
 
 def addRecipe(recipe):
     lid=len(MyRecipe.query.filter_by(id=current_identity).all())
-    myRecipe=MyRecipe(id=current_identity, lid=lid)
+    rid=len(MyRecipe.query.all())
+    myRecipe=MyRecipe(rid=rid, id=current_identity.id, lid=lid, rname=recipe["label"], calories=recipe["calories"], fat=recipe["digest"][0]["total"])
+    try:
+        db.session.add(myRecipe)
+        db.session.commit() # save user
+    except IntegrityError: # attempted to insert a duplicate item
+        db.session.rollback()
+        return False # error message
+    return True # success
