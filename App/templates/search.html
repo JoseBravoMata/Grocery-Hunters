@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block title %}Recipe Search{% endblock %}
+{% block page %}Recipe Search{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  
+    .moveme {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+  background-color:#F5F5F5;
+  padding: 40px;
+  max-width:600px;
+  max-height:600px;
+  margin:40px auto;
+  width: 100%;
+  length: 100%;
+  }
+
+  
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="moveme">
+    <h1 class="teal lighten-3">Recipe Search</h1>
+    <input name="input" id="search" placeholder="Enter search criteria"/>
+    <main class="row" style="padding: 40px">
+         <table>
+           <thead>
+                <tr>
+                   <th>name</th>
+                   <th>mealtype</th>
+                   <th>calories</th>
+                </tr>
+                </thead>
+                  <tbody id="result">
+                                                
+                  </tbody>
+           </table>
+     </main>
+  </div>
+
+  <script>
+      //548342bb (key)
+      function drawTable(records){
+        let result = document.querySelector('#result');
+        //add html code inside of result
+        let html = '';// create html string
+        for(let record of records){
+          //build html string
+          html += `<tr>
+            <td>${record.name}</td>
+            <td>${record.mealtype}</td>
+            <td>${record.calories}</td>    
+          </tr>`;
+        }
+        result.innerHTML = html;//add html string to DOM
+      }
+
+    //function MUST be declared async
+      async function getData(url){
+        try{
+          let response = await fetch(url);//1. Send http request and get response
+          let result = await response.json();//2. Get data from response
+          drawTable(result);// 3. Do something with the data
+        }catch(e){
+          console.log(e);//catch and log any errors
+        }
+      }
+      function searchForRecipe(e){
+        let name;
+        if (e.key === 'Enter'){
+          name=document.querySelector("#search").value;
+          getData("https://api.edamam.com/search?q=${name}&app_id=4627e75c&app_key=150810b824001e4b27fd844e7cec9aac");
+        }
+      }
+      document.querySelector("#search").addEventListener('keypress', searchForRecipe);
+  </script>
+
+{% endblock %}
