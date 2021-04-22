@@ -32,9 +32,11 @@
          <table>
            <thead>
                 <tr>
+                   <th>picture</th>
                    <th>name</th>
                    <th>mealtype</th>
                    <th>calories</th>
+                   <th>Prepare time</th>
                 </tr>
                 </thead>
                   <tbody id="result">
@@ -48,14 +50,20 @@
       //548342bb (key)
       function drawTable(records){
         let result = document.querySelector('#result');
-        //add html code inside of result
+        records=records.hits;
         let html = '';// create html string
         for(let record of records){
+          if(!record.recipe.mealType)
+            record.recipe.mealType="N/A";
+          if(record.recipe.totalTime==0)
+            record.recipe.totalTime="N/A";
           //build html string
           html += `<tr>
-            <td>${record.name}</td>
-            <td>${record.mealtype}</td>
-            <td>${record.calories}</td>    
+            <td><img width="300" height="400" src="${record.recipe.image}"/></td>
+            <td>${record.recipe.label}</td>
+            <td>${record.recipe.mealType}</td>
+            <td>${record.recipe.calories}</td>    
+            <td>${record.recipe.totalTime}</td> 
           </tr>`;
         }
         result.innerHTML = html;//add html string to DOM
@@ -72,6 +80,7 @@
             }
           );//1. Send http request and get response
           let result = await response.json();//2. Get data from response
+          console.log(result);
           drawTable(result);// 3. Do something with the data
         }catch(e){
           console.log(e);//catch and log any errors
@@ -79,9 +88,11 @@
       }
       function searchForRecipe(e){
         let name;
+        let appID='4627e75c';
+        let appKey='150810b824001e4b27fd844e7cec9aac';
         if (e.key === 'Enter'){
           name=document.querySelector("#search").value;
-          getData("https://api.edamam.com/search?q=${name}&app_id=4627e75c&app_key=150810b824001e4b27fd844e7cec9aac");
+          getData(`https://api.edamam.com/search?q=${name}&app_id=${appID}&app_key=${appKey}`);
         }
       }
       document.querySelector("#search").addEventListener('keypress', searchForRecipe);
