@@ -25,6 +25,18 @@ def get_search_page():
 def add_new_recipe():
     return addRecipe(request.get_json())
 
+@user_views.route('/myrecipes/<id>', methods=['DELETE'])
+def delete_recipe(id):
+    return DeleteRecipe(id, request.get_json())
+
+@user_views.route('/myrecipes/<id>', methods=['PUT'])
+def update_recipe(id):
+    return updateRecipe(id, request.get_json())
+
+@user_views.route('/recipes', methods=['GET', 'POST'])
+def get_my_recipes():
+    return getMyRecipes(request.get_json())
+
 @user_views.route('/signin', methods=['POST'])
 def sign_user_in():
     if sign_in(request.get_json()):

@@ -1,6 +1,7 @@
 from flask import redirect, render_template, request, session, url_for
 from flask_jwt import JWT, jwt_required, current_identity
 from sqlalchemy.exc import IntegrityError
+import json
 
 from App.models import ( db, User, MyRecipe )
 
@@ -34,7 +35,8 @@ def addRecipe(recipe):
     user=User.query.filter_by(email=recipe["email"]).first()
     lid=len(MyRecipe.query.filter_by(id=user.id).all())
     rid=len(MyRecipe.query.all())
-    myRecipe=MyRecipe(rid=rid, id=user.id, lid=lid, rname=recipe["label"], calories=recipe["calories"], fat=recipe["digest"][0]["total"])
+    ingredients="ingredients"
+    myRecipe=MyRecipe(rid=rid, id=user.id, lid=lid, rname=recipe["label"], calories=recipe["calories"], fat=recipe["digest"][0]["total"], ingredients=ingredients)
     try:
         db.session.add(myRecipe)
         db.session.commit() # save user
@@ -42,3 +44,9 @@ def addRecipe(recipe):
         db.session.rollback()
         return "Failure" # error message
     return "Success" # success
+
+def getMyRecipes(data):
+    user=User.query.filter_by(email=data["email"]).first()
+    recipes=MyRecipe.query.filter_by(id=user.id).all()
+    recipes=[recipe.toDict() for recipe in recipes]
+    return json.dumps(recipes) # success
