@@ -59,7 +59,7 @@
         for(let record of records){
           if(!record.mealType)
             record.mealType="N/A";
-          if(record.done)
+          if(record.done==true)
             done="Ingredients purchased";
           else
             done="Ingredients not purchased";
@@ -69,7 +69,7 @@
             <td>${record.calories}</td>
             <td>${record.fat}</td>    
             <td>${record.ingredients}</td>
-            <td><button id="recipe${record.lid}" onclick="updateRecipe('${record.lid}','${done}')">${done}</a></td>
+            <td><button id="recipe${record.lid}" onclick="updateRecipe('${record.lid}','${record.done}')">${done}</a></td>
             <td><button onclick="deleteRecipe('${record.lid}')">Delete recipe</a></td>          
           </tr>`;
         }
@@ -156,7 +156,11 @@
       }
 
       function updateRecipe(lid, done){
-        updateData('/myrecipes/'+lid, !done);
+        if(done=="false")
+          done=true;
+        else
+          done=false;
+        updateData('/myrecipes/'+lid, done);
       }
 
   </script>

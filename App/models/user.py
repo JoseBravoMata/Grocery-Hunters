@@ -54,5 +54,6 @@ class MyRecipe(db.Model):
             'rname': self.rname,
             'calories': self.calories,
             'fat': self.fat,
-            'ingredients': self.ingredients
+            'ingredients': self.ingredients,
+            'done': self.done
         }
