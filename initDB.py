@@ -1,5 +1,5 @@
 from main import app
-from models import db, Ingredients
+from models import db, Products
 import csv
 
 db.create_all(app=app)
@@ -19,13 +19,13 @@ with open('products.csv', newline='') as csvfile:
         if row['price'] == '':
             row['price'] = None
 
-            ingrediants = Ingredients(
+            products = Products(
                 no= row['no'],
                 products= row['products'],
                 products= row['brand'],
                 products= row['size'],
                 products= row['price']
             )
-            db.session.add(item)
+            db.session.add(products)
             db.session.commit()
 print('database initialized!')
