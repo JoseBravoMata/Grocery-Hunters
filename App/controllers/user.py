@@ -39,7 +39,7 @@ def addRecipe(recipe):
     for ingredient in recipe["ingredients"]:
         ingredients+=ingredient["text"]
         ingredients+=", "
-    myRecipe=MyRecipe(rid=rid, id=user.id, lid=lid, rname=recipe["label"], calories=recipe["calories"], fat=recipe["digest"][0]["total"], ingredients=ingredients)
+    myRecipe=MyRecipe(rid=rid, id=user.id, lid=lid, rname=recipe["label"], calories=recipe["calories"], fat=recipe["digest"][0]["total"], ingredients=ingredients, done=False)
     try:
         db.session.add(myRecipe)
         db.session.commit() # save user
@@ -47,6 +47,26 @@ def addRecipe(recipe):
         db.session.rollback()
         return "Failure" # error message
     return "Success" # success
+
+def deleteRecipe(lid, data):
+    user=User.query.filter_by(email=data["email"]).first()
+    recipe=MyRecipe.query.filter_by(id=user.id, lid=lid).first()
+    if recipe:
+        db.session.delete(recipe)
+        db.session.commit()
+        return 'Success'
+    return "Failure" 
+
+def updateRecipe(lid, data):
+    user=User.query.filter_by(email=data["email"]).first()
+    recipe=MyRecipe.query.filter_by(id=user.id, lid=lid).first()
+    if recipe:
+        recipe.done = data['done']
+        db.session.add(recipe)
+        db.session.commit()
+        return 'Success'
+    return "Failure" 
+
 
 def getMyRecipes(data):
     user=User.query.filter_by(email=data["email"]).first()

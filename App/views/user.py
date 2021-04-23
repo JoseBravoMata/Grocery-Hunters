@@ -27,7 +27,7 @@ def add_new_recipe():
 
 @user_views.route('/myrecipes/<id>', methods=['DELETE'])
 def delete_recipe(id):
-    return DeleteRecipe(id, request.get_json())
+    return deleteRecipe(id, request.get_json())
 
 @user_views.route('/myrecipes/<id>', methods=['PUT'])
 def update_recipe(id):

@@ -31,10 +31,11 @@
          <table>
            <thead>
                 <tr>
-                   <th>name</th>
-                   <th>calories</th>
-                   <th>fat</th>
+                   <th>Name</th>
+                   <th>Calories</th>
+                   <th>Fat</th>
                    <th>Ingredients</th>
+                   <th>Obtained</th>
                 </tr>
                 </thead>
                   <tbody id="result">
@@ -54,20 +55,25 @@
       function drawTable(records){
         let result = document.querySelector('#result');
         let html = '';// create html string
-        let lid=0;
+        let done;
         for(let record of records){
           if(!record.mealType)
             record.mealType="N/A";
+          if(record.done)
+            done="Ingredients purchased";
+          else
+            done="Ingredients not purchased";
           //build html string
           html += `<tr>
             <td>${record.rname}</td>
             <td>${record.calories}</td>
             <td>${record.fat}</td>    
-            <td>${record.ingredients}</td>          
+            <td>${record.ingredients}</td>
+            <td><button id="recipe${record.lid}" onclick="updateRecipe('${record.lid}','${done}')">${done}</a></td>
+            <td><button onclick="deleteRecipe('${record.lid}')">Delete recipe</a></td>          
           </tr>`;
         }
-        /*<td><a href="${record.recipe.url}">Preparation</a></td>
-            <td><button onclick="addRecipe('${lid}')">Add recipe ingredients to shopping list</a></td>*/
+
         result.innerHTML = html;//add html string to DOM
       }
 
@@ -75,7 +81,6 @@
       async function getData(url){
         let data={email:""};
         data.email=sessionStorage.getItem("email");
-        alert(data.email);
         if(!data.email){
           alert("Must be logged in");
           return;
@@ -99,13 +104,9 @@
       
       getData("/recipes");
 
-      async function deleteData(url, data){
+      async function deleteData(url){
+        data={email:""};
         data.email=sessionStorage.getItem("email");
-        if(!data.email){
-          alert("Must be logged in");
-          return;    
-        }
-
         try{
           let response = await fetch(
             url, 
@@ -117,14 +118,45 @@
           );//1. Send http request and get response
           let result = await response.text();//2. Get message from response 
           console.log(result);
-          alert(result);
+          if(result=="Success"){
+            window.location.href="/list";
+          }
         }catch(error){
           console.log(error);//catch and log any errors
         }
       }
 
-      function DeleteRecipe(lid){
+      function deleteRecipe(lid){
         deleteData('/myrecipes/'+lid);
+      }
+
+      async function updateData(url, done){
+        data={
+            email: "",
+            done: done
+        };
+        data.email=sessionStorage.getItem("email");
+        try{
+          let response = await fetch(
+            url, 
+            {
+              method: 'PUT',
+              body: JSON.stringify(data),//convert data to JSON string
+              headers: { 'Content-Type':'application/json' }// JSON data
+            },
+          );//1. Send http request and get response
+          let result = await response.text();//2. Get message from response 
+          console.log(result);
+          if(result=="Success"){
+            window.location.href="/list";
+          }
+        }catch(error){
+          console.log(error);//catch and log any errors
+        }
+      }
+
+      function updateRecipe(lid, done){
+        updateData('/myrecipes/'+lid, !done);
       }
 
   </script>

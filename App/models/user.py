@@ -45,6 +45,7 @@ class MyRecipe(db.Model):
     calories=  db.Column(db.Integer, nullable=True)
     fat=  db.Column(db.Integer, nullable=True)
     ingredients= db.Column(db.String, nullable=False)
+    done = db.Column(db.Boolean, nullable=False)
    
     def toDict(self):
         return{
