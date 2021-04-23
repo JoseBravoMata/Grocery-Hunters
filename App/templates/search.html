@@ -110,6 +110,11 @@
 
       async function postData(url, data){
         data.email=sessionStorage.getItem("email");
+        if(!data.email){
+          alert("Must be logged in");
+          return;    
+        }
+
         try{
           let response = await fetch(
             url, 
@@ -121,6 +126,7 @@
           );//1. Send http request and get response
           let result = await response.text();//2. Get message from response 
           console.log(result);
+          alert(result);
         }catch(error){
         console.log(error);//catch and log any errors
         }
@@ -129,7 +135,6 @@
       function addRecipe(lid){
         recipe=JSON.parse(sessionStorage.getItem(''+lid));
         postData('/myrecipes', recipe);
-        this.value="Added";
       }
 
   </script>
