@@ -1,0 +1,168 @@
+{% extends "layout.html" %}
+{% block title %}Grocery list{% endblock %}
+{% block page %}Grocery list{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  
+    .moveme {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+  background-color:#F5F5F5;
+  padding: 40px;
+  max-width:600px;
+  max-height:600px;
+  margin:40px auto;
+  width: 100%;
+  length: 100%;
+  }
+
+  
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="moveme">
+    <h1 class="teal lighten-3">Grocery list</h1>
+    <main class="row">
+         <table>
+           <thead>
+                <tr>
+                   <th>Name</th>
+                   <th>Calories</th>
+                   <th>Fat</th>
+                   <th>Ingredients</th>
+                   <th>Obtained</th>
+                </tr>
+                </thead>
+                  <tbody id="result">
+                                                
+                  </tbody>
+           </table>
+     </main>
+  </div>
+
+  <footer>
+      <script src="https://developer.edamam.com/attribution/badge.js"></script>
+      <div id="edamam-badge" data-color="white"></div>
+  </footer>
+
+  <script>
+
+      function drawTable(records){
+        let result = document.querySelector('#result');
+        let html = '';// create html string
+        let done;
+        for(let record of records){
+          if(!record.mealType)
+            record.mealType="N/A";
+          if(record.done==true)
+            done="Ingredients purchased";
+          else
+            done="Ingredients not purchased";
+          //build html string
+          html += `<tr>
+            <td>${record.rname}</td>
+            <td>${record.calories}</td>
+            <td>${record.fat}</td>    
+            <td>${record.ingredients}</td>
+            <td><button id="recipe${record.lid}" onclick="updateRecipe('${record.lid}','${record.done}')">${done}</a></td>
+            <td><button onclick="deleteRecipe('${record.lid}')">Delete recipe</a></td>          
+          </tr>`;
+        }
+
+        result.innerHTML = html;//add html string to DOM
+      }
+
+    //function MUST be declared async
+      async function getData(url){
+        let data={email:""};
+        data.email=sessionStorage.getItem("email");
+        if(!data.email){
+          alert("Must be logged in");
+          return;
+        }
+        try{
+          let response = await fetch(
+            url,
+            {
+              method: 'POST',
+              body: JSON.stringify(data),
+              headers: { 'Content-Type':'application/json' }// JSON data
+            }
+          );//1. Send http request and get response
+          let result = await response.json();//2. Get data from response
+          console.log(result);
+          drawTable(result);// 3. Do something with the data
+        }catch(e){
+          console.log(e);//catch and log any errors
+        }
+      }
+      
+      getData("/recipes");
+
+      async function deleteData(url){
+        data={email:""};
+        data.email=sessionStorage.getItem("email");
+        try{
+          let response = await fetch(
+            url, 
+            {
+              method: 'DELETE',
+              body: JSON.stringify(data),//convert data to JSON string
+              headers: { 'Content-Type':'application/json' }// JSON data
+            },
+          );//1. Send http request and get response
+          let result = await response.text();//2. Get message from response 
+          console.log(result);
+          if(result=="Success"){
+            window.location.href="/list";
+          }
+        }catch(error){
+          console.log(error);//catch and log any errors
+        }
+      }
+
+      function deleteRecipe(lid){
+        deleteData('/myrecipes/'+lid);
+      }
+
+      async function updateData(url, done){
+        data={
+            email: "",
+            done: done
+        };
+        data.email=sessionStorage.getItem("email");
+        try{
+          let response = await fetch(
+            url, 
+            {
+              method: 'PUT',
+              body: JSON.stringify(data),//convert data to JSON string
+              headers: { 'Content-Type':'application/json' }// JSON data
+            },
+          );//1. Send http request and get response
+          let result = await response.text();//2. Get message from response 
+          console.log(result);
+          if(result=="Success"){
+            window.location.href="/list";
+          }
+        }catch(error){
+          console.log(error);//catch and log any errors
+        }
+      }
+
+      function updateRecipe(lid, done){
+        if(done=="false")
+          done=true;
+        else
+          done=false;
+        updateData('/myrecipes/'+lid, done);
+      }
+
+  </script>
+
+{% endblock %}

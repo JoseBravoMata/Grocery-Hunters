@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+{% block title %}Recipe Search{% endblock %}
+{% block page %}Recipe Search{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  
+    .moveme {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+  background-color:#F5F5F5;
+  padding: 40px;
+  max-width:600px;
+  max-height:600px;
+  margin:40px auto;
+  width: 100%;
+  length: 100%;
+  }
+
+  
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="moveme">
+    <h1 class="teal lighten-3">Recipe Search</h1>
+    <input name="input" id="search" placeholder="Enter search criteria"/>
+    <main class="row" style="padding: 40px">
+         <table>
+           <thead>
+                <tr>
+                   <th>picture</th>
+                   <th>name</th>
+                   <th>mealtype</th>
+                   <th>calories</th>
+                   <th>fat</th>
+                   <th>Prepare time</th>
+                </tr>
+                </thead>
+                  <tbody id="result">
+                                                
+                  </tbody>
+           </table>
+     </main>
+  </div>
+
+  <footer>
+      <script src="https://developer.edamam.com/attribution/badge.js"></script>
+      <div id="edamam-badge" data-color="white"></div>
+  </footer>
+
+  <script>
+      //548342bb (key)
+      function drawTable(records){
+        let result = document.querySelector('#result');
+        records=records.hits;
+        let html = '';// create html string
+        let lid=0;
+        for(let record of records){
+          if(!record.recipe.mealType)
+            record.recipe.mealType="N/A";
+          if(record.recipe.totalTime==0)
+            record.recipe.totalTime="N/A";
+          lid++;
+          sessionStorage.setItem(''+lid, JSON.stringify(record.recipe));
+          //build html string
+          html += `<tr>
+            <td><img width="300" height="400" src="${record.recipe.image}"/></td>
+            <td>${record.recipe.label}</td>
+            <td>${record.recipe.mealType}</td>
+            <td>${record.recipe.calories}</td>
+            <td>${record.recipe.digest[0].total}${record.recipe.digest[0].unit}</td>    
+            <td>${record.recipe.totalTime}</td>
+            <td><a href="${record.recipe.url}">Preparation</a></td>
+            <td><button onclick="addRecipe('${lid}')">Add recipe ingredients to shopping list</a></td>
+          </tr>`;
+        }
+        result.innerHTML = html;//add html string to DOM
+      }
+
+    //function MUST be declared async
+      async function getData(url){
+        try{
+          let response = await fetch(
+            url,
+            {
+              method: 'GET',
+              headers: { 'Content-Type':'application/json' }// JSON data
+            }
+          );//1. Send http request and get response
+          let result = await response.json();//2. Get data from response
+          console.log(result);
+          drawTable(result);// 3. Do something with the data
+        }catch(e){
+          console.log(e);//catch and log any errors
+        }
+      }
+      function searchForRecipe(e){
+        let name;
+        let appID='4627e75c';
+        let appKey='150810b824001e4b27fd844e7cec9aac';
+        if (e.key === 'Enter'){
+          name=document.querySelector("#search").value;
+          getData(`https://api.edamam.com/search?q=${name}&app_id=${appID}&app_key=${appKey}`);
+        }
+      }
+      document.querySelector("#search").addEventListener('keypress', searchForRecipe);
+
+      async function postData(url, data){
+        data.email=sessionStorage.getItem("email");
+        if(!data.email){
+          alert("Must be logged in");
+          return;    
+        }
+
+        try{
+          let response = await fetch(
+            url, 
+            {
+              method: 'POST',
+              body: JSON.stringify(data),//convert data to JSON string
+              headers: { 'Content-Type':'application/json' }// JSON data
+            },
+          );//1. Send http request and get response
+          let result = await response.text();//2. Get message from response 
+          console.log(result);
+          alert(result);
+        }catch(error){
+        console.log(error);//catch and log any errors
+        }
+      }
+
+      function addRecipe(lid){
+        recipe=JSON.parse(sessionStorage.getItem(''+lid));
+        postData('/myrecipes', recipe);
+      }
+
+  </script>
+
+{% endblock %}
