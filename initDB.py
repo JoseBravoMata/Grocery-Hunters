@@ -28,4 +28,4 @@ with open('products.csv', newline='') as csvfile:
             )
             db.session.add(products)
             db.session.commit()
-print('database initialized!')
+print('Database Initialized!')
