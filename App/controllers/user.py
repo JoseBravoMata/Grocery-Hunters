@@ -35,7 +35,10 @@ def addRecipe(recipe):
     user=User.query.filter_by(email=recipe["email"]).first()
     lid=len(MyRecipe.query.filter_by(id=user.id).all())
     rid=len(MyRecipe.query.all())
-    ingredients="ingredients"
+    ingredients=""
+    for ingredient in recipe["ingredients"]:
+        ingredients+=ingredient["text"]
+        ingredients+=", "
     myRecipe=MyRecipe(rid=rid, id=user.id, lid=lid, rname=recipe["label"], calories=recipe["calories"], fat=recipe["digest"][0]["total"], ingredients=ingredients)
     try:
         db.session.add(myRecipe)

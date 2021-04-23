@@ -64,6 +64,7 @@
             record.recipe.mealType="N/A";
           if(record.recipe.totalTime==0)
             record.recipe.totalTime="N/A";
+          lid++;
           sessionStorage.setItem(''+lid, JSON.stringify(record.recipe));
           //build html string
           html += `<tr>
