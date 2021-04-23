@@ -22,9 +22,9 @@ with open('products.csv', newline='') as csvfile:
             products = Products(
                 no= row['no'],
                 products= row['products'],
-                products= row['brand'],
-                products= row['size'],
-                products= row['price']
+                brand= row['brand'],
+                size= row['size'],
+                price= row['price']
             )
             db.session.add(products)
             db.session.commit()
