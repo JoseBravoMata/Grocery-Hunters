@@ -1,0 +1,630 @@
+{% extends "layout.html" %}
+{% block title %}Products{% endblock %}
+{% block page %}Products{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  
+    .moveme {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+  background-color:#F5F5F5;
+  padding: 40px;
+  max-width:600px;
+  max-height:600px;
+  margin:40px auto;
+  width: 100%;
+  }
+
+
+   body, html{
+        height: 100vh;
+      }
+
+      #listing{
+      overflow-y: scroll;
+      max-height: 70vh;
+      }
+      
+      aside, article{
+        max-height: 25vh;
+      }
+
+  
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="moveme">
+
+<h1 class="teal lighten-3">Products</h1>
+        
+      <div class="row">
+        <main class="row" style="padding: 40px"></main>
+        <table class="col m6 offset-m3">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Products</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>WHOLE CHICKEN (Frozen)</td>
+                    <td>Fine Choice</td>
+                    <td>$24.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>WHOLE CHICKEN (Chilled)</td>
+                    <td>Fine Choice</td>
+                    <td>$24.50</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>CHICKEN BREAST (Frozen)</td>
+                    <td>Fine Choice</td>
+                    <td>$24.50</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>CHICKEN DRUMSTICK (Frozen)</td>
+                    <td>Fine Choice</td>
+                    <td>$24.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>CHICKEN THIGHS (Frozen)</td>
+                    <td>Fine Choice</td>
+                    <td>$15.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>CHICKEN WINGS (Frozen)</td>
+                    <td>Fine Choice</td>
+                    <td>$24.50</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>ECONOMY PACK (Frozen)</td>
+                    <td>Fine Choice</td>
+                    <td>$39.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>CHICKEN BREAST (Chilled)</td>
+                    <td>Fine Choice</td>
+                    <td>$21.18</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>CHICKEN DRUMSTICK (Chilled)</td>
+                    <td>Fine Choice</td>
+                    <td>$22.08</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>CHICKEN THIGHS (Chilled)</td>
+                    <td>Fine Choice</td>
+                    <td>$16.09</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>CHICKEN WINGS (Chilled)</td>
+                    <td>Fine Choice</td>
+                    <td>$22.39</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>PORK STEW</td>
+                    <td>Erin Farm</td>
+                    <td>$15.45</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>BEEF STEW</td>
+                    <td>Erin Farm</td>
+                    <td>$28.64</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>PIG TAIL</td>
+                    <td>Erin Farm</td>
+                    <td>$24.13</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>CHICKEN FRANKS</td>
+                    <td>Erin Farm</td>
+                    <td>$24.13</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>SALTED FISH (w/Bone)</td>
+                    <td>Unbranded</td>
+                    <td>$14.35</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>SALTED FISH (w/Bone)</td>
+                    <td>Branded</td>
+                    <td>$22.20</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>SALTED FISH (w/Bone)</td>
+                    <td>Branded</td>
+                    <td>$22.20</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>SALTED FISH (Boneless)</td>
+                    <td>Unbranded</td>
+                    <td>$34.23</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>SALTED FISH (Boneless)</td>
+                    <td>Branded</td>
+                    <td>$27.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>SMOKED HERRING (w/Bone)</td>
+                    <td>Unbranded</td>
+                    <td>$20.22</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>FRESH BUTTER</td>
+                    <td>Kerrygold</td>
+                    <td>$52.75</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>CHEDDAR CHEESE</td>
+                    <td>Unbranded</td>
+                    <td>$50.90</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>COOKING MARGARINE</td>
+                    <td>G/Ray</td>
+                    <td>$8.90</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>COOKING MARGARINE</td>
+                    <td>French Maid</td>
+                    <td>$7.65</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>TABLE MARGARINE</td>
+                    <td>Blue Band</td>
+                    <td>$9.45</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>TABLE MARGARINE</td>
+                    <td>Flora</td>
+                    <td>$23.60</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td>EGGS</td>
+                    <td>Large</td>
+                    <td>$24.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>LIQUID MILK (Full Cream)</td>
+                    <td>Nestle</td>
+                    <td>$13.75</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>LIQUID MILK (Skimmed)</td>
+                    <td>Svelty</td>
+                    <td>$13.55</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>POWDERED MILK</td>
+                    <td>D/Dairy</td>
+                    <td>$52.95</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td>POWDERED MILK</td>
+                    <td>D/Dairy</td>
+                    <td>$16.50</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td>POWDERED MILK (Skimmed)</td>
+                    <td>D/Dairy</td>
+                    <td>$57.95</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>POWDERED MILK (Skimmed)</td>
+                    <td>D/Dairy</td>
+                    <td>$30.95</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>35</td>
+                    <td>EVAPORATED MILK (Tin)</td>
+                    <td>Carnation</td>
+                    <td>$10.85</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>36</td>
+                    <td>EVAPORATED MILK (Pack)</td>
+                    <td>G/Butterfly</td>
+                    <td>$6.50</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td>CONDENSED MILK</td>
+                    <td>Nestle</td>
+                    <td>$10.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>38</td>
+                    <td>CONDENSED MILK</td>
+                    <td>Eve</td>
+                    <td>$6.25</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>39</td>
+                    <td>MACARONI</td>
+                    <td>Swiss</td>
+                    <td>$5.80</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td>SPAGHETTI</td>
+                    <td>Swiss</td>
+                    <td>$6.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td>BAKING POWDER</td>
+                    <td>Lion</td>
+                    <td>$11.50</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>42</td>
+                    <td>PRE PACKAGED FLOUR</td>
+                    <td>Ibis</td>
+                    <td>$14.25</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>43</td>
+                    <td>FLOUR</td>
+                    <td>Ibis</td>
+                    <td>$73.30</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>44</td>
+                    <td>PRE PACKAGED RICE (Parboiled)</td>
+                    <td>Happi</td>
+                    <td>$51.60</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>45</td>
+                    <td>PRE PACKAGED RICE (Parboiled)</td>
+                    <td>Lotus</td>
+                    <td>$41.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>46</td>
+                    <td>PRE PACKAGED RICE (Parboiled)</td>
+                    <td>Lotus</td>
+                    <td>$10.50</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>47</td>
+                    <td>OATS</td>
+                    <td>Cook’s Mate</td>
+                    <td>$4.95</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>48</td>
+                    <td>YEAST</td>
+                    <td>Fermipan</td>
+                    <td>$7.65</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>49</td>
+                    <td>CORN MEAL</td>
+                    <td>Regal</td>
+                    <td>$5.40</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>50</td>
+                    <td>BISCUITS (Unsweetened)</td>
+                    <td>Crix - Original</td>
+                    <td>$13.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>51</td>
+                    <td>SPLIT PEAS (Loose)</td>
+                    <td>Unbranded</td>
+                    <td>$3.18</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>52</td>
+                    <td>SPLIT PEAS (Loose)</td>
+                    <td>Unbranded</td>
+                    <td>$10.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>53</td>
+                    <td>RED BEANS (Loose)</td>
+                    <td>Unbranded</td>
+                    <td>$10.40</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>54</td>
+                    <td>RED BEANS (Loose)</td>
+                    <td>Unbranded</td>
+                    <td>$8.75</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>55</td>
+                    <td>D/PIGEON PEAS (Loose)</td>
+                    <td>Unbranded</td>
+                    <td>$9.03</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>56</td>
+                    <td>D/PIGEON PEAS (Loose)</td>
+                    <td>Unbranded</td>
+                    <td>$7.25</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>57</td>
+                    <td>CHANNA (Loose)</td>
+                    <td>Unbranded</td>
+                    <td>$8.77</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>58</td>
+                    <td>CHANNA (Loose)</td>
+                    <td>Unbranded</td>
+                    <td>$10.25</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>59</td>
+                    <td>BLACK EYE PEAS (Loose)</td>
+                    <td>Unbranded</td>
+                    <td>$7.47</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>60</td>
+                    <td>BLACK EYE PEAS (Loose)</td>
+                    <td>Unbranded</td>
+                    <td>$8.60</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>61</td>
+                    <td>LENTIL (Loose)</td>
+                    <td>Unbranded</td>
+                    <td>$3.63</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>62</td>
+                    <td>LENTIL (Loose)</td>
+                    <td>Unbranded</td>
+                    <td>$3.50</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>63</td>
+                    <td>SPLIT PEAS (Pre Packaged)</td>
+                    <td>N/Pride</td>
+                    <td>$5.75</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>64</td>
+                    <td>RED BEANS (Pre Packaged)</td>
+                    <td>N/Pride</td>
+                    <td>$10.80</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>65</td>
+                    <td>PIGEON PEAS (Pre Packaged)</td>
+                    <td>N/Pride</td>
+                    <td>$8.85</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>66</td>
+                    <td>CHANNA (Pre Packaged)</td>
+                    <td>N/Pride</td>
+                    <td>$9.45</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>67</td>
+                    <td>BLACK EYE PEAS (Pre Packaged)</td>
+                    <td>N/Pride</td>
+                    <td>$8.15</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>68</td>
+                    <td>LENTILS (Pre Packaged)</td>
+                    <td>N/Pride</td>
+                    <td>$7.90</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>69</td>
+                    <td>CURRY POWDER</td>
+                    <td>Chief </td>
+                    <td>$9.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>70</td>
+                    <td>WHITE VINEGAR</td>
+                    <td>Mabel</td>
+                    <td>$7.90</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>71</td>
+                    <td>POTATO</td>
+                    <td>Unbranded</td>
+                    <td>$3.61</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>72</td>
+                    <td>POTATO</td>
+                    <td>Unbranded</td>
+                    <td>$5.20</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>73</td>
+                    <td>GARLIC</td>
+                    <td>Unbranded</td>
+                    <td>$14.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>74</td>
+                    <td>GARLIC</td>
+                    <td>Unbranded</td>
+                    <td>$12.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>75</td>
+                    <td>SUGAR (Loose)</td>
+                    <td>Unbranded</td>
+                    <td>$3.52</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>76</td>
+                    <td>SUGAR – BROWN (Pre Packaged)</td>
+                    <td>Demerara</td>
+                    <td>$17.00</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>77</td>
+                    <td>SUGAR (Granulated)</td>
+                    <td>Sweet Cane</td>
+                    <td>$19.15</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>78</td>
+                    <td>TABLE SALT (Pre Packaged)</td>
+                    <td>Chief</td>
+                    <td>$3.25</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>79</td>
+                    <td>TABLE SALT (Pre Packaged)</td>
+                    <td>Chief</td>
+                    <td>$3.25</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+                <tr>
+                    <td>80</td>
+                    <td>MAUBY</td>
+                    <td>Matouk’s</td>
+                    <td>$13.03</td>
+                    <td><button>Add to Grocery List</button></td>
+                </tr>
+            </tbody> 
+        </table>
+        </main>
+      </div>
+
+
+
+
+
+
+    
+  </div>
+
+{% endblock %}

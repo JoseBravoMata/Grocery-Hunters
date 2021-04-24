@@ -13,6 +13,7 @@ def get_user_page():
 def get_products_page():
     return render_template('products.html')
 
+
 @user_views.route('/list', methods=['GET'])
 def get_list_page():
     return render_template('list.html')
