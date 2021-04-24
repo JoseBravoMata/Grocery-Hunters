@@ -1,19 +1,25 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
- 
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+{% extends "layout.html" %}
+{% block title %}Products{% endblock %}
+{% block page %}Products{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  
+    .moveme {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+  background-color:#F5F5F5;
+  padding: 40px;
+  max-width:600px;
+  max-height:600px;
+  margin:40px auto;
+  width: 100%;
+  length: 100%;
+  }
 
- 
-    <title>Products</title>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <style>
-      body, html{
+
+   body, html{
         height: 100vh;
       }
 
@@ -26,21 +32,26 @@
         max-height: 25vh;
       }
 
-    </style>
-  </head>
+  
 
-  <body>
-        <nav class="teal">
-          <div class="nav-wrapper">
-            <a href="#!" class="brand-logo center">Products</a>
-          </div>
-        </nav>
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="moveme">
+
+<h1 class="teal lighten-3">Products</h1>
         
       <div class="row">
+        <main class="row" style="padding: 40px"></main>
         <table class="col m6 offset-m3">
             <thead>
                 <tr>
-                    <th>No.</th><th>Products</th><th>Brand</th><th>Price</th>
+                    <th>No.</th>
+                    <th>Products</th>
+                    <th>Brand</th>
+                    <th>Price</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,11 +65,15 @@
                 {% endfor %}
             </tbody> 
         </table>
+        </main>
       </div>
-        
-    <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-  </body>
-</html>
+
+
+
+
+
+    
+  </div>
+
+{% endblock %}
