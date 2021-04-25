@@ -20,8 +20,7 @@ def sign_in(userdata):
   return False
 
 def sign_up(userdata):
-    id=len(User.query.all())
-    newuser = User(id=id, firstname=userdata['firstname'],lastname=userdata['lastname'], email=userdata['email']) # create user object
+    newuser = User( firstname=userdata['firstname'],lastname=userdata['lastname'], email=userdata['email']) # create user object
     newuser.set_password(userdata['password']) # set password
     try:
         db.session.add(newuser)
