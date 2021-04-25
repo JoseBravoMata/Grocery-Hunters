@@ -11,10 +11,7 @@ def get_user_page():
 
 @user_views.route('/products', methods=['GET'])
 def get_products_page():
-    products = Products.query.all()
-    products = [item for item in products] 
-    return json.dumps(products)
-    return render_template('products.html', products= products)
+    return render_template('products.html')
 
 
 @user_views.route('/list', methods=['GET'])
